@@ -21,17 +21,21 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when {
-                // execute this stage only if the previous stages were successful
-                expression { BRANCH_NAME == 'master'}
+            // when {
+            //     // execute this stage only if the previous stages were successful
+            //     expression { BRANCH_NAME == 'master'}
+            // } 
+            // print the branch name
+            steps {
+                echo "Deploying branch ${BRANCH_NAME}"
             }
             steps {
                 echo 'Deploying...'
                 withCredentials([usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh "echo ${USERNAME} ${PASSWORD}" 
-                } // example how to use credentials
-
-                // Deploy your code here
+                    // Use the USERNAME and PASSWORD variables in a secure way
+                    // For example, to authenticate with a server
+                    // sh "some-command --user ${USERNAME} --password ${PASSWORD}"
+                }
             }
         }
     }
