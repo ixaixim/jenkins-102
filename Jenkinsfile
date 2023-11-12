@@ -24,7 +24,6 @@ pipeline {
             when {
                 // execute this stage only if the previous stages were successful
                 expression { BRANCH_NAME == 'master'}
-                echo 'Deploying on master branch...'
             }
             steps {
                 echo 'Deploying...'
