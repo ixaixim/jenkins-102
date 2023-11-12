@@ -1,6 +1,7 @@
 pipeline {
     agent any
-    parameters {
+    parameters { 
+        // define parameters for pipeline
         // string(name: 'VERSION', defaultValue: '', description: 'Version to deploy')
         choice(name: 'VERSION', choices: ['1.0', '1.1', '1.2'], description: 'Version to deploy')
         booleanParam(name: 'executeTests', defaultValue: true, description: 'Enable debug mode')
@@ -8,8 +9,8 @@ pipeline {
     environment {
         // define environment variables here
         // e.g. AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
-        NEW_VERSION = sh(script: 'echo $BUILD_NUMBER', returnStdout: true).trim()
         // SERVER_CREDENTIALS = credentials('server-credentials') // define credentials here, needs credentials plugin
+        NEW_VERSION = sh(script: 'echo $BUILD_NUMBER', returnStdout: true).trim()
     }
     // tools {
     //     // define tools here
@@ -26,9 +27,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-                gv.buildApp()
+                script {
+                    gv.buildApp()
+                }
                 echo "Building version ${NEW_VERSION}" // use environment variable within DOUBLE quotes!
-                 
             }
         }
         stage('Test') {
@@ -36,13 +38,17 @@ pipeline {
                 expression { params.executeTests == true }
             }
             steps {
-                gv.testApp()
+                script {
+                    gv.testApp()
+                }
                 // Test your code here
             }
         }
         stage('Deploy') {
             steps {
-                gv.deployApp()
+                script {
+                    gv.deployApp()
+                }
             }
         }
     }
