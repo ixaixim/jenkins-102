@@ -28,12 +28,12 @@ pipeline {
             // print the branch name
             steps {
                 echo "Deploying branch ${BRANCH_NAME}"
-                withCredentials([usernamePassword(credentialsId: '245fadd9-9fc2-4ee1-9868-20269bc04ed4', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    // Use the USERNAME and PASSWORD variables in a secure way
-                    // For example, to authenticate with a server
-                    // sh "some-command --user ${USERNAME} --password ${PASSWORD}"
-                    echo "Username: ${USERNAME}"
-                }
+                // withCredentials([usernamePassword(credentialsId: '245fadd9-9fc2-4ee1-9868-20269bc04ed4', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                //     // Use the USERNAME and PASSWORD variables in a secure way
+                //     // For example, to authenticate with a server
+                //     // sh "some-command --user ${USERNAME} --password ${PASSWORD}"
+                //     echo "Username: ${USERNAME}"
+                // }
             }
         }
     }
