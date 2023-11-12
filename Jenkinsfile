@@ -17,9 +17,16 @@ pipeline {
     //     maven 'Maven 3.6.3'
     // }
     stages {
+        stage('Init') {
+            steps {
+                script {
+                    gv = load 'script.groovy'
+                }
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Building...'
+                gv.buildApp()
                 echo "Building version ${NEW_VERSION}" // use environment variable within DOUBLE quotes!
                  
             }
@@ -29,14 +36,13 @@ pipeline {
                 expression { params.executeTests == true }
             }
             steps {
-                echo 'Testing...'
+                gv.testApp()
                 // Test your code here
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
-                echo "Deploying version ${params.VERSION}" // use environment variable within DOUBLE quotes!
+                gv.deployApp()
             }
         }
     }
