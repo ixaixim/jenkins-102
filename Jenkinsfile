@@ -39,12 +39,15 @@ pipeline {
         always {
             // always execute this block
             // e.g. send email to team
+            echo 'Sending email to team...'
         }
         success {
             // execute this block only if the stage was successful
+            echo 'success'
         }
         failure {
             // execute this block only if the stage was failed
+            echo 'failure'
         }
     } // post attribute executes logic after the pipeline is done
 }
