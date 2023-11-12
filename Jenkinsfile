@@ -28,9 +28,6 @@ pipeline {
             // print the branch name
             steps {
                 echo "Deploying branch ${BRANCH_NAME}"
-            }
-            steps {
-                echo 'Deploying...'
                 withCredentials([usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     // Use the USERNAME and PASSWORD variables in a secure way
                     // For example, to authenticate with a server
